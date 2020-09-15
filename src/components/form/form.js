@@ -34,50 +34,53 @@ class Form extends React.Component {
       <div>
         <form>
           <h3>URL:</h3>
-          <input
-            type="text"
-            value={this.state.url}
-            placeholder="Enter your URL here"
-            onChange={this.handleURL}
-          />
-          <button>GO!</button>
+          <div>
+            <input
+              type="text"
+              value={this.state.url}
+              placeholder="Enter your URL here"
+              onChange={this.handleURL}
+            />
+            <button>GO!</button>
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="method"
+              id="get"
+              value="GET"
+              label="GET"
+              onClick={this.handleMethod}
+            />
+            <label>GET</label>
 
-          <input
-            type="radio"
-            name="method"
-            id="get"
-            value="GET"
-            label="GET"
-            onClick={this.handleMethod}
-          />
-          <label>GET</label>
+            <input
+              type="radio"
+              name="method"
+              id="post"
+              value="POST"
+              onClick={this.handleMethod}
+            />
+            <label>POST</label>
 
-          <input
-            type="radio"
-            name="method"
-            id="post"
-            value="POST"
-            onClick={this.handleMethod}
-          />
-          <label>POST</label>
+            <input
+              type="radio"
+              name="method"
+              id="put"
+              value="PUT"
+              onClick={this.handleMethod}
+            />
+            <label>PUT</label>
 
-          <input
-            type="radio"
-            name="method"
-            id="put"
-            value="PUT"
-            onClick={this.handleMethod}
-          />
-          <label>PUT</label>
-
-          <input
-            type="radio"
-            name="method"
-            id="delete"
-            value="DELETE"
-            onClick={this.handleMethod}
-          />
-          <label>DELETE</label>
+            <input
+              type="radio"
+              name="method"
+              id="delete"
+              value="DELETE"
+              onClick={this.handleMethod}
+            />
+            <label>DELETE</label>
+          </div>
         </form>
         <div id="results">
           <h3>
