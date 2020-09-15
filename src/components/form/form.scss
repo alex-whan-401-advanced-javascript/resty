@@ -1,0 +1,30 @@
+form {
+  margin: 5%;
+}
+
+form > * {
+  text-align: center;
+}
+
+button {
+  margin: 1%;
+}
+
+input {
+  border: 2px black solid;
+}
+
+label {
+  border: 2px darkgray solid;
+  background-color: lightgrey;
+  margin: 1%;
+  padding: 1%;
+}
+
+#results {
+  height: 40%;
+  background-color: lightgrey;
+  border: darkgrey 3px solid;
+  padding: 10%;
+  margin: 5%;
+}
