@@ -29,3 +29,5 @@ Development of RESTy will take place over four distinct phases:
 ### Phase 4: Fit and Finish
 
 ### UML Diagram
+
+![RESTy UML - Day 1](./assets/RESTy-UML.png)
