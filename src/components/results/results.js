@@ -9,11 +9,11 @@ import JSONPretty from 'react-json-pretty';
 const Results = props => {
   return (
     <div id="results">
-      <h3>Count: {props.count}</h3>
+      <h3 data-testid="count">Count: {props.count}</h3>
       <h3>Headers: {props.headers}</h3>
-      <p>
+      <h4>
         Results: <JSONPretty data={props.results}></JSONPretty>
-      </p>
+      </h4>
     </div>
   );
 };
