@@ -4,7 +4,7 @@ A browser-based, RESTful API testing tool built with React.
 
 ## Author: Alex Whan
 
-## Version: 1.0.0
+## Version: 0.9.2
 
 ## Overview
 
@@ -23,6 +23,11 @@ Development of RESTy will take place over four distinct phases:
 - When the form is filled out, and the button is clicked, display the URL and the method chosen
 
 ### Phase 2: Testing and Deployment
+
+- User enters an API URL, chooses a REST Method and clicks the “Go” button to send a request
+- Application fetches data from the URL given, with the method specified
+- Application will retrieve data from the API
+- Displays the response headers and results separately in “pretty printed” JSON format for readability
 
 ### Phase 3: State and Props
 
