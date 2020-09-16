@@ -1,16 +1,28 @@
 import React from 'react';
 import './form.scss';
 
+// Expects a function to be sent to it as a prop
+
+// Renders a URL entry form
+
+// A selection of REST methods to choose from (“get” should be the default)
+
+// On submit
+
+// Send the API results back to the <App> using the method sent down in props
+
 class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      method: '',
+      method: 'get',
       url: '',
     };
+
     this.handleURL = this.handleURL.bind(this);
     this.handleMethod = this.handleMethod.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleURL = event => {
@@ -19,74 +31,63 @@ class Form extends React.Component {
   };
 
   handleMethod = event => {
+    event.preventDefault();
     let method = event.target.value;
     this.setState({ method });
   };
 
   handleClick = event => {
     event.preventDefault();
-    let url = event.target.value;
+    let url = this.state.url; // or event.target.value??
     this.setState({ url });
+  };
+
+  handleSubmit = async event => {
+    event.preventDefault();
+    let raw = await fetch(this.state.url);
+    let headers = await raw.headers.get('content-type');
+
+    let data = await raw.json();
+    let count = JSON.stringify(data.count);
+    let results = JSON.stringify(data.results);
+    // console.log('Stringified results???', results);
+
+    // This says: After I do this stuff above, I'm going to call this.props.handler, and give it count and resultFromURL (this tells us that it requires a handler to be passed in)
+    // This code REQUIRES that a "handler" function is supplied via props from SOMEWHERE - from the PARENT
+    this.props.handler(count, headers, results);
   };
 
   render() {
     return (
       <div>
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <h3>URL:</h3>
           <div>
             <input
               type="text"
-              value={this.state.url}
               placeholder="Enter your URL here"
               onChange={this.handleURL}
             />
-            <button>GO!</button>
+            <button>{this.props.prompt}</button>
           </div>
           <div>
-            <input
-              type="radio"
-              name="method"
-              id="get"
-              value="GET"
-              label="GET"
-              onClick={this.handleMethod}
-            />
-            <label>GET</label>
+            <button value="GET" onClick={this.handleMethod}>
+              GET
+            </button>
 
-            <input
-              type="radio"
-              name="method"
-              id="post"
-              value="POST"
-              onClick={this.handleMethod}
-            />
-            <label>POST</label>
+            <button value="POST" onClick={this.handleMethod}>
+              POST
+            </button>
 
-            <input
-              type="radio"
-              name="method"
-              id="put"
-              value="PUT"
-              onClick={this.handleMethod}
-            />
-            <label>PUT</label>
+            <button value="PUT" onClick={this.handleMethod}>
+              PUT
+            </button>
 
-            <input
-              type="radio"
-              name="method"
-              id="delete"
-              value="DELETE"
-              onClick={this.handleMethod}
-            />
-            <label>DELETE</label>
+            <button value="DELETE" onClick={this.handleMethod}>
+              DELETE
+            </button>
           </div>
         </form>
-        <div id="results">
-          <h3>
-            {this.state.method} {this.state.url}
-          </h3>
-        </div>
       </div>
     );
   }
