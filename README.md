@@ -31,6 +31,12 @@ Development of RESTy will take place over four distinct phases:
 
 ### Phase 3: State and Props
 
+- Adding more functionality to application, including a menu, history, and an "in-progress"/loading indicator
+- Users can use all REST methods on URL endpoints
+- Application will display a list of all previous queries users have run, saved in local storage
+- Users can click on an old query and have their selections appear in the form for them, without re-typing
+- Add a “loading” indicator while RESTy is fetching data to indicate the application is processing a request
+
 ### Phase 4: Fit and Finish
 
 ### UML Diagram
