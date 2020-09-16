@@ -1,16 +1,6 @@
 import React from 'react';
 import './form.scss';
 
-// Expects a function to be sent to it as a prop
-
-// Renders a URL entry form
-
-// A selection of REST methods to choose from (“get” should be the default)
-
-// On submit
-
-// Send the API results back to the <App> using the method sent down in props
-
 class Form extends React.Component {
   constructor(props) {
     super(props);
