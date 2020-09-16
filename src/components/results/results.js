@@ -19,6 +19,3 @@ const Results = props => {
 };
 
 export default Results;
-
-// Remember: React REALLY doesn't like "raw" objects - you need to turn it into something React can render
-// Easiest way is to just turn it into a string
