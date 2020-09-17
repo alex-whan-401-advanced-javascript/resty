@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios';
+import md5 from 'md5';
 import './App.css';
 import Header from './components/header/header';
 import Form from './components/form/form';
@@ -17,23 +19,19 @@ import Footer from './components/footer/footer';
 // Display any fetch/load errors in place of the results area, if they occur
 
 // Add a “Loading” indicator while fetching
-
 // When the user clicks the “Go!” button, show a loading icon on the page
-
 // When the fetching of results is complete, remove the loading icon and show the results
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      count: 0,
       headers: null,
       results: [],
       loading: false,
     };
   }
 
-  // Missing headers
   // https://swapi.dev/api/people/
   handleForm = (count, headers, results) => {
     this.setState({ count, headers, results });
