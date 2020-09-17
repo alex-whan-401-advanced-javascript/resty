@@ -1,4 +1,5 @@
 import React from 'react';
+import './history.scss';
 
 // Create a new <History/> inline component that will:
 
