@@ -1,43 +1,104 @@
 import React from 'react';
-import './App.css';
+import axios from 'axios';
+import md5 from 'md5';
+// import './App.css';
 import Header from './components/header/header';
 import Form from './components/form/form';
 import Results from './components/results/results';
+import History from './components/history/history';
 import Footer from './components/footer/footer';
 
-//Container
+// Add a simple history list to the left side of the application
 
-//Holds state: Count and Results Array
+// List all previous queries, showing the method and the URL
 
-//A class method that can update state
+// When a user clicks a previous query, populate the RESTy forms with the query information
 
-//Renders 2 Child Components
+// Completely hide the output area (Headers & Results) when there are none to display
+
+// Display any fetch/load errors in place of the results area, if they occur
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      count: 0,
-      headers: null,
+      headers: {},
+      history: {},
       results: [],
+      request: {},
+      loading: false,
     };
   }
 
-  // Missing headers
   // https://swapi.dev/api/people/
-  handleForm = (count, headers, results) => {
-    this.setState({ count, headers, results });
+
+  // updates results if needed
+  updateResults = (headers, results) => {
+    this.setState({ headers, results });
   };
+
+  // updates the request body if needed
+  updateRequest = request => {
+    this.setState({ request });
+    console.log('REQ', this.state.request);
+  };
+
+  updateHistory = request => {
+    let hash = md5(JSON.stringify(request));
+
+    const history = {
+      ...this.state.history,
+      [hash]: request,
+    };
+
+    this.setState({ history }, () => {
+      localStorage.setItem('history', JSON.stringify(this.state.history));
+    });
+  };
+
+  // // Need to convert to fetch data
+  // handleForm = (count, headers, results) => {
+  //   this.setState({ count, headers, results });
+  // };
+
+  // Turns loading on/off
+  toggleLoading = () => {
+    this.setState({ loading: !this.state.loading });
+  };
+
+  fetchResults = async request => {
+    try {
+      this.toggleLoading();
+      this.updateRequest(request);
+      let response = await axios(request);
+      this.toggleLoading();
+      this.updateHistory(request);
+      this.updateResults(response.headers, response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Do we need componentDidMount?
+  componentDidMount() {
+    let history = JSON.parse(localStorage.getItem('history'));
+    this.setState({ history });
+  }
 
   render() {
     return (
       <div className="App">
         <Header />
-        <Form prompt="Go!" handler={this.handleForm} />
+        <Form
+          prompt="Go!"
+          request={this.state.request}
+          handler={this.fetchResults}
+        />
+        <History handler={this.updateRequest} calls={this.state.history} />
         <Results
-          count={this.state.count}
           headers={this.state.headers}
           results={this.state.results}
+          loading={this.state.loading}
         />
         <Footer />
       </div>

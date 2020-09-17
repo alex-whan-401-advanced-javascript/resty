@@ -5,48 +5,47 @@ class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      method: 'get',
-      url: '',
+      request: {
+        method: props.request.method || 'get',
+        url: props.request.url || '',
+        data: props.request.data ? JSON.stringify(props.request.data) : '',
+      },
     };
-
-    this.handleURL = this.handleURL.bind(this);
-    this.handleMethod = this.handleMethod.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  // should update our URL
   handleURL = event => {
+    // event.preventDefault();
     let url = event.target.value;
-    this.setState({ url });
+    let request = { ...this.state.request, url }; // can we use "request" name here too?
+    this.setState({ request });
   };
 
-  handleMethod = event => {
+  // should update our method
+  // method APPEARS to be updating properly
+  // Just kidding, it's definitely not
+  handleMethod = method => {
+    // event coming up UNDEFINED??
+    let request = { ...this.state.request, method };
+    this.setState({ request });
+  };
+
+  handleDataBody = event => {
+    try {
+      let data = JSON.parse(event.target.value);
+      let request = { ...this.state.request, data };
+      this.setState({ request });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  handleSubmit = async (event, props) => {
     event.preventDefault();
-    let method = event.target.value;
-    this.setState({ method });
+    this.props.handler(this.state.request);
   };
 
-  handleClick = event => {
-    event.preventDefault();
-    let url = this.state.url; // or event.target.value??
-    this.setState({ url });
-  };
-
-  handleSubmit = async event => {
-    event.preventDefault();
-    let raw = await fetch(this.state.url);
-    let headers = await raw.headers.get('content-type');
-
-    let data = await raw.json();
-    let count = JSON.stringify(data.count);
-    let results = JSON.stringify(data.results);
-    // console.log('Stringified results???', results);
-
-    // This says: After I do this stuff above, I'm going to call this.props.handler, and give it count and resultFromURL (this tells us that it requires a handler to be passed in)
-    // This code REQUIRES that a "handler" function is supplied via props from SOMEWHERE - from the PARENT
-    this.props.handler(count, headers, results);
-  };
-
+  // may need to CALL these methods below
   render() {
     return (
       <div>
@@ -55,27 +54,50 @@ class Form extends React.Component {
           <div>
             <input
               type="text"
-              placeholder="Enter your URL here"
+              defaultValue={this.state.request.url}
+              placeholder="Enter your URL here."
               onChange={this.handleURL}
             />
             <button>{this.props.prompt}</button>
           </div>
           <div>
-            <button value="GET" onClick={this.handleMethod}>
+            <span
+              value="get"
+              className="methodSelect"
+              onClick={() => this.handleMethod('get')}
+            >
               GET
-            </button>
+            </span>
 
-            <button value="POST" onClick={this.handleMethod}>
+            <span
+              value="post"
+              className="methodSelect"
+              onClick={() => this.handleMethod('post')}
+            >
               POST
-            </button>
+            </span>
 
-            <button value="PUT" onClick={this.handleMethod}>
+            <span
+              value="put"
+              className="methodSelect"
+              onClick={() => this.handleMethod('put')}
+            >
               PUT
-            </button>
+            </span>
 
-            <button value="DELETE" onClick={this.handleMethod}>
+            <span
+              value="delete"
+              className="methodSelect"
+              onClick={() => this.handleMethod('delete')}
+            >
               DELETE
-            </button>
+            </span>
+
+            <input
+              name="data"
+              onChange={this.handleDataBody}
+              defaultValue={this.state.request.data}
+            />
           </div>
         </form>
       </div>
