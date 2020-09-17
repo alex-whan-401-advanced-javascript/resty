@@ -58,7 +58,7 @@ class App extends React.Component {
       this.updateRequest(request);
       let response = await axios(request);
       this.toggleLoading();
-      this.updateHistory(request);
+      // this.updateHistory(request);
       this.updateResults(response.headers, response.data);
     } catch (error) {
       console.log(error);
@@ -77,7 +77,6 @@ class App extends React.Component {
           handler={this.fetchResults}
         />
         <Results
-          count={this.state.count}
           headers={this.state.headers}
           results={this.state.results}
           loading={this.state.loading}

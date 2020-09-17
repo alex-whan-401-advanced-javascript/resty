@@ -16,6 +16,7 @@ import loading from '../../assets/loading.gif';
 // When the fetching of results is complete, remove the loading icon and show the results
 
 const Results = props => {
+  console.log('PROPS???', props);
   return (
     <div id="results">
       {props.loading ? (
