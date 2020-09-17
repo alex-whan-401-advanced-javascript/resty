@@ -24,10 +24,10 @@ const Results = props => {
         <Loading />
       ) : (
         <>
-          <h3>
+          <h3 data-testid="headers">
             Headers: <ReactJson src={props.headers} />
           </h3>
-          <h3>
+          <h3 data-testid="results">
             Results: <ReactJson src={props.results} />
           </h3>
         </>
