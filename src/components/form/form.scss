@@ -1,5 +1,7 @@
 form {
   margin: 5%;
+  display: flex;
+  flex-direction: column;
 }
 
 form > * {
@@ -21,14 +23,18 @@ label {
   padding: 1%;
 }
 
-#results {
-  height: 40%;
-  background-color: lightgrey;
-  border: darkgrey 3px solid;
-  padding: 10%;
-  margin: 5%;
-}
-
 div {
   margin: 2%;
+}
+
+.methodSelect {
+  border: 2px slategray solid;
+  border-radius: 5%;
+  background-color: darkgrey;
+  margin: 0.5em;
+  padding: 0.5em;
+}
+.methodSelect:active {
+  background-color: darkslategray;
+  color: white;
 }

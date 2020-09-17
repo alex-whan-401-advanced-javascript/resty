@@ -40,6 +40,7 @@ class App extends React.Component {
   // updates the request body if needed
   updateRequest = request => {
     this.setState({ request });
+    console.log('REQ', this.state.request);
   };
 
   updateHistory = request => {
@@ -71,7 +72,7 @@ class App extends React.Component {
       this.updateRequest(request);
       let response = await axios(request);
       this.toggleLoading();
-      // this.updateHistory(request);
+      this.updateHistory(request);
       this.updateResults(response.headers, response.data);
     } catch (error) {
       console.log(error);
@@ -79,6 +80,10 @@ class App extends React.Component {
   };
 
   // Do we need componentDidMount?
+  componentDidMount() {
+    let history = JSON.parse(localStorage.getItem('history'));
+    this.setState({ history });
+  }
 
   render() {
     return (

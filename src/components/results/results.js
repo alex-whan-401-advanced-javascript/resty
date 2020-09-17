@@ -21,16 +21,16 @@ import './results.scss';
 
 const Results = props => {
   return (
-    <div id="results">
+    <div className="results">
       {props.loading ? (
         <Loading />
       ) : (
         <>
           <h3>
-            Headers: <ReactJson src={props.headers}></ReactJson>
+            Headers: <ReactJson src={props.headers} />
           </h3>
           <h3>
-            Results: <ReactJson src={props.results}></ReactJson>
+            Results: <ReactJson src={props.results} />
           </h3>
         </>
       )}

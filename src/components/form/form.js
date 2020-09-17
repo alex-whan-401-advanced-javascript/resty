@@ -20,6 +20,7 @@ class Form extends React.Component {
   };
 
   // should update our method
+  // method APPEARS to be updating properly
   handleMethod = method => {
     let request = { ...this.state.request, method };
     this.setState({ request });
@@ -64,21 +65,35 @@ class Form extends React.Component {
             <button>{this.props.prompt}</button>
           </div>
           <div>
-            <button value="get" onClick={this.handleMethod}>
+            <span
+              value="get"
+              className="methodSelect"
+              onClick={() => this.handleMethod('get')}
+            >
               GET
-            </button>
+            </span>
 
-            <button value="post" onClick={this.handleMethod}>
+            <span
+              value="post"
+              className="methodSelect"
+              onClick={() => this.handleMethod('post')}
+            >
               POST
-            </button>
+            </span>
 
-            <button value="put" onClick={this.handleMethod}>
+            <span
+              className="methodSelect"
+              onClick={() => this.handleMethod('put')}
+            >
               PUT
-            </button>
+            </span>
 
-            <button value="delete" onClick={this.handleMethod}>
+            <span
+              className="methodSelect"
+              onClick={() => this.handleMethod('delete')}
+            >
               DELETE
-            </button>
+            </span>
           </div>
         </form>
       </div>

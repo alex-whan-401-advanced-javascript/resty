@@ -14,7 +14,7 @@ const History = props => {
   }
 
   return (
-    <aside>
+    <aside className="history">
       <ul>
         {Object.keys(calls).map(key => (
           <li key={key}>
