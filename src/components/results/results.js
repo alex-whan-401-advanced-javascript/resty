@@ -29,9 +29,9 @@ const Results = props => {
           <h3>
             Headers: <ReactJson src={props.headers}></ReactJson>
           </h3>
-          <h4>
+          <h3>
             Results: <ReactJson src={props.results}></ReactJson>
-          </h4>
+          </h3>
         </>
       )}
     </div>

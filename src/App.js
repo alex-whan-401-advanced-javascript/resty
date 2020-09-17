@@ -42,6 +42,19 @@ class App extends React.Component {
     this.setState({ request });
   };
 
+  updateHistory = request => {
+    let hash = md5(JSON.stringify(request));
+
+    const history = {
+      ...this.state.history,
+      [hash]: request,
+    };
+
+    this.setState({ history }, () => {
+      localStorage.setItem('history', JSON.stringify(this.state.history));
+    });
+  };
+
   // // Need to convert to fetch data
   // handleForm = (count, headers, results) => {
   //   this.setState({ count, headers, results });
@@ -76,6 +89,7 @@ class App extends React.Component {
           request={this.state.request}
           handler={this.fetchResults}
         />
+        <History calls={this.state.history} />
         <Results
           headers={this.state.headers}
           results={this.state.results}
