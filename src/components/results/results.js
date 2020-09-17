@@ -11,6 +11,10 @@ import JSONPretty from 'react-json-pretty';
 import ReactJson from 'react-json-view';
 import loading from '../../assets/loading.gif';
 
+// Add a “Loading” indicator while fetching
+// When the user clicks the “Go!” button, show a loading icon on the page
+// When the fetching of results is complete, remove the loading icon and show the results
+
 const Results = props => {
   return (
     <div id="results">

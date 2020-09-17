@@ -18,34 +18,64 @@ import Footer from './components/footer/footer';
 
 // Display any fetch/load errors in place of the results area, if they occur
 
-// Add a “Loading” indicator while fetching
-// When the user clicks the “Go!” button, show a loading icon on the page
-// When the fetching of results is complete, remove the loading icon and show the results
-
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       headers: null,
+      history: {},
       results: [],
+      request: {},
       loading: false,
     };
   }
 
   // https://swapi.dev/api/people/
-  handleForm = (count, headers, results) => {
-    this.setState({ count, headers, results });
+
+  // updates results if needed
+  updateResults = (headers, results) => {
+    this.setState({ headers, results });
   };
 
+  // updates the request body if needed
+  updateRequest = request => {
+    this.setState({ request });
+  };
+
+  // // Need to convert to fetch data
+  // handleForm = (count, headers, results) => {
+  //   this.setState({ count, headers, results });
+  // };
+
+  // Turns loading on/off
   toggleLoading = () => {
     this.setState({ loading: !this.state.loading });
   };
+
+  fetchResults = async request => {
+    try {
+      this.toggleLoading();
+      this.updateRequest(request);
+      let response = await axios(request);
+      this.toggleLoading();
+      this.updateHistory(request);
+      this.updateResults(response.headers, response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Do we need componentDidMount?
 
   render() {
     return (
       <div className="App">
         <Header />
-        <Form prompt="Go!" handler={this.handleForm} />
+        <Form
+          prompt="Go!"
+          request={this.state.request}
+          handler={this.fetchResults}
+        />
         <Results
           count={this.state.count}
           headers={this.state.headers}
