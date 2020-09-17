@@ -39,7 +39,8 @@ class Form extends React.Component {
 
     let data = await raw.json();
     let count = JSON.stringify(data.count);
-    let results = JSON.stringify(data.results);
+    // let results = JSON.stringify(data.results);
+    let results = data.results;
     // console.log('Stringified results???', results);
 
     // This says: After I do this stuff above, I'm going to call this.props.handler, and give it count and resultFromURL (this tells us that it requires a handler to be passed in)

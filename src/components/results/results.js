@@ -8,6 +8,7 @@
 
 import React from 'react';
 import JSONPretty from 'react-json-pretty';
+import ReactJson from 'react-json-view';
 import loading from '../../assets/loading.gif';
 
 const Results = props => {
@@ -20,9 +21,11 @@ const Results = props => {
       ) : (
         <>
           <h3 data-testid="count">Count: {props.count}</h3>
-          <h3>Headers: {props.headers}</h3>
+          <h3>
+            Headers: <ReactJson src={props.headers}></ReactJson>
+          </h3>
           <h4>
-            Results: <JSONPretty data={props.results}></JSONPretty>
+            Results: <ReactJson src={props.results}></ReactJson>
           </h4>
         </>
       )}
