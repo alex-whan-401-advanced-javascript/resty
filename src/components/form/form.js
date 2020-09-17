@@ -92,6 +92,12 @@ class Form extends React.Component {
             >
               DELETE
             </span>
+
+            <input
+              name="data"
+              onChange={this.handleDataBody}
+              defaultValue={this.state.request.data}
+            />
           </div>
         </form>
       </div>
