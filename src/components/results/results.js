@@ -15,9 +15,7 @@ import './results.scss';
 // When the user clicks the “Go!” button, show a loading icon on the page
 // When the fetching of results is complete, remove the loading icon and show the results
 
-{
-  /* <h3 data-testid="count">Count: {props.count}</h3> */
-}
+/* <h3 data-testid="count">Count: {props.count}</h3> */
 
 const Results = props => {
   return (

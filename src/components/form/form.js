@@ -5,26 +5,27 @@ class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      method: props.request.method || 'get',
-      url: props.request.url || '',
-      request: {},
-      data: props.request.data ? JSON.stringify(props.request.data) : '',
+      request: {
+        method: props.request.method || 'get',
+        url: props.request.url || '',
+        data: props.request.data ? JSON.stringify(props.request.data) : '',
+      },
     };
   }
 
   // should update our URL
   handleURL = event => {
-    event.preventDefault();
+    // event.preventDefault();
     let url = event.target.value;
-    let request = { ...this.state.request, url };
+    let request = { ...this.state.request, url }; // can we use "request" name here too?
     this.setState({ request });
   };
 
   // should update our method
   // method APPEARS to be updating properly
-  handleMethod = event => {
-    event.preventDefault();
-    let method = event.target.value;
+  // Just kidding, it's definitely not
+  handleMethod = method => {
+    // event coming up UNDEFINED??
     let request = { ...this.state.request, method };
     this.setState({ request });
   };
@@ -42,14 +43,6 @@ class Form extends React.Component {
   handleSubmit = async (event, props) => {
     event.preventDefault();
     this.props.handler(this.state.request);
-
-    // let raw = await fetch(this.state.url);
-    // let headers = await raw.headers.get('content-type');
-
-    // let data = await raw.json();
-    // let count = JSON.stringify(data.count);
-
-    // let results = data.results;
   };
 
   // may need to CALL these methods below
@@ -85,6 +78,7 @@ class Form extends React.Component {
             </span>
 
             <span
+              value="put"
               className="methodSelect"
               onClick={() => this.handleMethod('put')}
             >
@@ -92,6 +86,7 @@ class Form extends React.Component {
             </span>
 
             <span
+              value="delete"
               className="methodSelect"
               onClick={() => this.handleMethod('delete')}
             >
