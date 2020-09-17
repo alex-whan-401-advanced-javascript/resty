@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import md5 from 'md5';
-import './App.css';
+// import './App.css';
 import Header from './components/header/header';
 import Form from './components/form/form';
 import Results from './components/results/results';
@@ -22,7 +22,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      headers: null,
+      headers: {},
       history: {},
       results: [],
       request: {},
@@ -89,7 +89,7 @@ class App extends React.Component {
           request={this.state.request}
           handler={this.fetchResults}
         />
-        <History calls={this.state.history} />
+        <History handler={this.updateRequest} calls={this.state.history} />
         <Results
           headers={this.state.headers}
           results={this.state.results}
