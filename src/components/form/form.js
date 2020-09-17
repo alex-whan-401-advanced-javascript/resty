@@ -14,6 +14,7 @@ class Form extends React.Component {
 
   // should update our URL
   handleURL = event => {
+    event.preventDefault();
     let url = event.target.value;
     let request = { ...this.state.request, url };
     this.setState({ request });
@@ -21,7 +22,9 @@ class Form extends React.Component {
 
   // should update our method
   // method APPEARS to be updating properly
-  handleMethod = method => {
+  handleMethod = event => {
+    event.preventDefault();
+    let method = event.target.value;
     let request = { ...this.state.request, method };
     this.setState({ request });
   };
