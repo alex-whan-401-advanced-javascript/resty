@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import md5 from 'md5';
-// import './App.css';
+import './App.css';
 import Header from './components/header/header';
 import Form from './components/form/form';
 import Results from './components/results/results';
@@ -28,9 +28,9 @@ class App extends React.Component {
     this.state = {
       headers: {},
       history: {},
-      // results: [],
       request: {},
       loading: false,
+      // results: [],
     };
   }
 

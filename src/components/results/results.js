@@ -31,9 +31,18 @@ const resultsData = props => {
     return (
       <>
         <h3 data-testid="headers">Headers:</h3>
-        <ReactJson src={props.headers} />
+        <ReactJson
+          src={props.headers}
+          theme="summerfruit:inverted"
+          indentWidth="2"
+        />
+
         <h3 data-testid="results">Results:</h3>
-        <ReactJson src={props.results} />
+        <ReactJson
+          src={props.results}
+          theme="summerfruit:inverted"
+          indentWidth="2"
+        />
       </>
     );
   } else {

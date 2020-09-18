@@ -1,9 +1,11 @@
 import React from 'react';
+import md5 from 'md5';
 import './form.scss';
 
 class Form extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       request: {
         method: props.request.method || 'get',
@@ -13,19 +15,25 @@ class Form extends React.Component {
     };
   }
 
+  componentDidUpdate(props) {
+    const nextHash = md5(JSON.stringify(props.request));
+    const stateHash = md5(JSON.stringify(this.state.request));
+
+    if (nextHash === stateHash) return;
+    const request = { ...props.request };
+
+    console.log('componentDidUpdate', request);
+    this.setState({ request });
+  }
+
   // should update our URL
   handleURL = event => {
-    // event.preventDefault();
     let url = event.target.value;
-    let request = { ...this.state.request, url }; // can we use "request" name here too?
+    let request = { ...this.state.request, url };
     this.setState({ request });
   };
 
-  // should update our method
-  // method APPEARS to be updating properly
-  // Just kidding, it's definitely not
   handleMethod = method => {
-    // event coming up UNDEFINED??
     let request = { ...this.state.request, method };
     this.setState({ request });
   };
@@ -45,14 +53,13 @@ class Form extends React.Component {
     this.props.handler(this.state.request);
   };
 
-  // may need to CALL these methods below
   render() {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <h3>URL:</h3>
           <div>
             <input
+              required={true}
               type="text"
               defaultValue={this.state.request.url}
               placeholder="Enter your URL here."
