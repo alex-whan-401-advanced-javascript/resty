@@ -3,6 +3,26 @@ header {
   padding: 20px;
   color: white;
   width: 100%;
+  margin: 0 auto;
+
+  ul {
+    margin: 0 auto;
+  }
+
+  li {
+    display: inline;
+    border: 2px solid darkgray;
+    border-radius: 0.35em;
+    padding: 0.25em;
+  }
+
+  li:active {
+    background-color: darkgray;
+  }
+
+  a {
+    color: white;
+  }
 }
 
 .App-header {
