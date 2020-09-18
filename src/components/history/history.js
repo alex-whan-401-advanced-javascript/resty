@@ -1,12 +1,6 @@
 import React from 'react';
 import './history.scss';
 
-// Create a new <History/> inline component that will:
-
-// Show a simple history list on the main page
-
-// Allow a user to click and re-run any previous query
-
 const History = props => {
   const calls = props.calls || {};
 
@@ -25,6 +19,7 @@ const History = props => {
             <button
               className="url"
               onClick={() => loadRequest(props.calls[key])}
+              // onClick={() => console.log('PROPS CALLS?', props.calls[key])}
             >
               {props.calls[key].url}
             </button>

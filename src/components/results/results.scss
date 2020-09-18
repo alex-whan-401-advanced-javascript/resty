@@ -1,16 +1,22 @@
 .results {
   overflow: auto;
-  height: 40%;
-  background-color: lightgrey;
+  height: 300px;
+  width: auto;
+  background-color: white;
   border: darkgrey 3px solid;
-  border-radius: 1.5em;
-  padding: 10%;
-  margin: 2%;
+  border-radius: 1em;
+  padding: 5%;
+  margin: 2% auto;
 
   img {
     margin: 0 auto;
     top: 50%;
     display: block;
     height: 200px;
+  }
+
+  h3 {
+    font-family: monospace;
+    font-size: 1.5em;
   }
 }

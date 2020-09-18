@@ -1,12 +1,14 @@
 import React from 'react';
 import axios from 'axios';
 import md5 from 'md5';
-// import './App.css';
+import './App.css';
 import Header from './components/header/header';
 import Form from './components/form/form';
 import Results from './components/results/results';
 import History from './components/history/history';
+import Help from './components/help/Help';
 import Footer from './components/footer/footer';
+import { Route, Switch } from 'react-router-dom';
 
 // Add a simple history list to the left side of the application
 
@@ -26,9 +28,9 @@ class App extends React.Component {
     this.state = {
       headers: {},
       history: {},
-      // results: [],
       request: {},
       loading: false,
+      // results: [],
     };
   }
 
@@ -42,7 +44,6 @@ class App extends React.Component {
   // updates the request body if needed
   updateRequest = request => {
     this.setState({ request });
-    console.log('REQ', this.state.request);
   };
 
   updateHistory = request => {
@@ -82,6 +83,15 @@ class App extends React.Component {
     }
   };
 
+  // In the <App />, use routes to display the correct components, based on the route
+  // Create a new <History/> page component that will:
+  // Show a list of URLs you’ve loaded before
+  // Show full details of each search
+  // Add a button to each to re-run the search
+  // Redirect to the home page to show the results
+  // Create a new <Help/> page component that will:
+  // Display static content to the users on how to use the application
+
   // Do we need componentDidMount?
   componentDidMount() {
     let history = JSON.parse(localStorage.getItem('history'));
@@ -90,21 +100,35 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
+      <main>
         <Header />
-        <Form
-          prompt="Go!"
-          request={this.state.request}
-          handler={this.fetchResults}
-        />
-        <History handler={this.updateRequest} calls={this.state.history} />
-        <Results
-          headers={this.state.headers}
-          results={this.state.results}
-          loading={this.state.loading}
-        />
+        <Switch>
+          <Route exact path="/">
+            <Form
+              prompt="Go!"
+              request={this.state.request}
+              handler={this.fetchResults}
+            />
+            <History
+              handler={this.updateRequest}
+              calls={this.state.history}
+              request={this.state.request}
+            />
+            <Results
+              headers={this.state.headers}
+              results={this.state.results}
+              loading={this.state.loading}
+            />
+          </Route>
+          <Route exact path="/history">
+            <History handler={this.updateRequest} calls={this.state.history} />
+          </Route>
+          <Route exact path="/help">
+            <Help />
+          </Route>
+        </Switch>
         <Footer />
-      </div>
+      </main>
     );
   }
 }
