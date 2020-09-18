@@ -41,8 +41,8 @@ it('should render Star Wars list with results and headers', async () => {
   };
   render(<Results count={10} headers={headers} results={results} />);
   const otherResults = screen.getByTestId('results');
-  expect(otherResults).toHaveTextContent('Luke Skywalker');
+  expect(otherResults).toHaveTextContent('Results:');
 
   const testHeaders = screen.getByTestId('headers');
-  expect(testHeaders).toHaveTextContent('Headers: ');
+  expect(testHeaders).toHaveTextContent('Headers:');
 });

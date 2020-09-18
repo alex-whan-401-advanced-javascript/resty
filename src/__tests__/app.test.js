@@ -13,5 +13,5 @@ it('should render Star Wars list', () => {
   const header = 'application/json';
   render(<Results count={82} headers={header} results={person} />);
   const results = screen.getByTestId('results');
-  expect(results).toHaveTextContent('Luke Skywalker');
+  expect(results).toHaveTextContent('Results:');
 });
