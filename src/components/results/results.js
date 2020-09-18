@@ -20,20 +20,25 @@ import './results.scss';
 const Results = props => {
   return (
     <div className="results">
-      {props.loading ? (
-        <Loading />
-      ) : (
-        <>
-          <h3 data-testid="headers">
-            Headers: <ReactJson src={props.headers} />
-          </h3>
-          <h3 data-testid="results">
-            Results: <ReactJson src={props.results} />
-          </h3>
-        </>
-      )}
+      {props.loading ? <Loading /> : resultsData(props)}
     </div>
   );
+};
+
+const resultsData = props => {
+  // empty array is truthy - so we need to check length???
+  if (props.results) {
+    return (
+      <>
+        <h3 data-testid="headers">Headers:</h3>
+        <ReactJson src={props.headers} />
+        <h3 data-testid="results">Results:</h3>
+        <ReactJson src={props.results} />
+      </>
+    );
+  } else {
+    return null;
+  }
 };
 
 export default Results;
