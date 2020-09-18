@@ -44,7 +44,6 @@ class App extends React.Component {
   // updates the request body if needed
   updateRequest = request => {
     this.setState({ request });
-    console.log('REQ', this.state.request);
   };
 
   updateHistory = request => {
@@ -110,7 +109,11 @@ class App extends React.Component {
               request={this.state.request}
               handler={this.fetchResults}
             />
-            <History handler={this.updateRequest} calls={this.state.history} />
+            <History
+              handler={this.updateRequest}
+              calls={this.state.history}
+              request={this.state.request}
+            />
             <Results
               headers={this.state.headers}
               results={this.state.results}
