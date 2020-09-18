@@ -18,13 +18,15 @@ import Footer from './components/footer/footer';
 
 // Display any fetch/load errors in place of the results area, if they occur
 
+// EMPTY ARRAY IN JAVASCRIPT IS TRUTHY!!!
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       headers: {},
       history: {},
-      results: [],
+      // results: [],
       request: {},
       loading: false,
     };
@@ -75,7 +77,8 @@ class App extends React.Component {
       this.updateHistory(request);
       this.updateResults(response.headers, response.data);
     } catch (error) {
-      console.log(error);
+      this.toggleLoading();
+      console.log('ERROR: ', error);
     }
   };
 

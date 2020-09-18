@@ -2,7 +2,7 @@ import React from 'react';
 import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import App from '../App';
-import Results from '../components/results/Results';
+import Results from '../components/results/results';
 
 it('should render Star Wars list', () => {
   const person = {
@@ -13,5 +13,5 @@ it('should render Star Wars list', () => {
   const header = 'application/json';
   render(<Results count={82} headers={header} results={person} />);
   const results = screen.getByTestId('results');
-  expect(results).toHaveTextContent('Luke Skywalker');
+  expect(results).toHaveTextContent('Results:');
 });

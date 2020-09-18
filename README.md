@@ -4,7 +4,10 @@ A browser-based, RESTful API testing tool built with React.
 
 ## Author: Alex Whan
 
-## Version: 0.9.2
+## Version: 0.9.4
+
+Visit the RESTy live link here:
+[flamboyant-spence-694af9.netlify.app/](https://flamboyant-spence-694af9.netlify.app/)
 
 ## Overview
 
@@ -38,6 +41,13 @@ Development of RESTy will take place over four distinct phases:
 - Add a “loading” indicator while RESTy is fetching data to indicate the application is processing a request
 
 ### Phase 4: Fit and Finish
+
+- Implementing navigation/menu bar using React Browser Router
+- Hide output area (headers and results) when there are none to display
+- Separate "History" page with a list of ever previous API call
+- Users can clicking on an entry to show the full details of that query in a separate section on the page
+- Users can consult a static "Help" page for information on how to use RESTy
+- Under-the-hood unit tests, CI/CD, and hosting via Netlify
 
 ### UML Diagram
 
